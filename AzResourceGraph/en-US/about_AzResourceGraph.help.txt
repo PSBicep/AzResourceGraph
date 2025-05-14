@@ -1,0 +1,23 @@
+TOPIC
+    about_AzResourceGraph
+
+SHORT DESCRIPTION
+    Minimal module for searching Azure Resource Graph.
+
+LONG DESCRIPTION
+    Minimal module for searching Azure Resource Graph for resources in your Azure subscriptions using a query string or a path to a file containing the query.
+
+EXAMPLES
+    PS C:\> Search-AzResourceGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project name, location, resourceGroup, tags" -SubscriptionId "00000000-0000-0000-0000-000000000000"
+
+NOTE:
+    Thank you to all those who contributed to this module, by writing code, sharing opinions, and providing feedback.
+
+TROUBLESHOOTING NOTE:
+    Look out on the Github repository for issues and new releases.
+
+SEE ALSO
+    - https://github.com/PSBicep/AzResourceGraph
+
+KEYWORDS
+    Azure, Azure Resource Graph, Search-AzResourceGraph, ARG, KQL, Kusto Query Language

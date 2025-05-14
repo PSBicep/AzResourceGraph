@@ -1,0 +1,6 @@
+{
+    "[powershell]": {
+        "files.trimTrailingWhitespace": true,
+        "files.encoding": "utf8bom"
+    }
+}
