@@ -45,7 +45,7 @@ Describe 'Connect-AzResourceGraph' {
                 }
             }
 
-            It 'Passses ClientCertificatePath to Get-AzToken as ClientCertificate' {
+            It 'Passes ClientCertificatePath to Get-AzToken as ClientCertificate' {
                 Mock 'Get-Item' { New-MockObject -Type 'System.Security.Cryptography.X509Certificates.X509Certificate2' }
                 $Params = @{
                     CertificatePath = 'Foo'
@@ -58,7 +58,7 @@ Describe 'Connect-AzResourceGraph' {
                 }
             }
 
-            It 'Passses ClientCertificatePath to Get-AzToken as ClientCertificatePath' {
+            It 'Passes ClientCertificatePath to Get-AzToken as ClientCertificatePath' {
                 Mock 'Get-Item' { New-MockObject -Type 'System.IO.FileInfo' }
                 $Params = @{
                     CertificatePath = 'Foo'

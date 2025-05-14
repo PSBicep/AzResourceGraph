@@ -53,7 +53,7 @@ Describe 'Assert-AzureConnection' {
                 $script:Token | Should -Be 'Refreshed'
             }
 
-            It 'Passses ClientCertificatePath to Get-AzToken as ClientCertificatePath' {
+            It 'Passes ClientCertificatePath to Get-AzToken as ClientCertificatePath' {
                 Mock 'Get-AzToken' { return 'RefreshedWithCertificate' }
                 Mock 'Get-Item' { 'PathAsString' }
                 Assert-AzureConnection -TokenSplat @{
@@ -67,7 +67,7 @@ Describe 'Assert-AzureConnection' {
                 $script:Token | Should -Be 'RefreshedWithCertificate'
             }
 
-            It 'Passses ClientCertificatePath to Get-AzToken as ClientCertificate' {
+            It 'Passes ClientCertificatePath to Get-AzToken as ClientCertificate' {
                 Mock 'Get-AzToken' { return 'RefreshedWithCertificate' }
                 Mock 'Get-Item' { New-MockObject -Type 'System.Security.Cryptography.X509Certificates.X509Certificate2' }
                 Assert-AzureConnection -TokenSplat @{
@@ -81,7 +81,7 @@ Describe 'Assert-AzureConnection' {
                 $script:Token | Should -Be 'RefreshedWithCertificate'
             }
 
-            It 'Passses ClientCertificatePath to Get-AzToken as ClientCertificatePath' {
+            It 'Passes ClientCertificatePath to Get-AzToken as ClientCertificatePath' {
                 Mock 'Get-AzToken' { return 'RefreshedWithCertificate' }
                 Mock 'Get-Item' { New-MockObject -Type 'System.IO.FileInfo' }
                 Assert-AzureConnection -TokenSplat @{
