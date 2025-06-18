@@ -32,6 +32,11 @@ Client secret string associated with the service principal.
 Switch indicating that the command should acquire a token using the
 Azure Managed Identity assigned to the current VM / App Service / container.
 
+.PARAMETER ManagementEndpoint
+Endpoint used for management. This is used for the Audience claim when authenticating to Azure.
+For global Azure, this should be left as the default of 'https://management.azure.com'.
+For Azure China, use 'https://management.chinacloudapi.cn' and for US Government Cloud use 'https://management.usgovcloudapi.net'.
+
 .EXAMPLE
 # 1. Interactive sign-in (prompts user)
 Connect-AzResourceGraph
@@ -82,13 +87,20 @@ function Connect-AzResourceGraph {
         [string]$ClientSecret,
 
         [Parameter(Mandatory, ParameterSetName = 'ManagedIdentity')]
-        [switch]$ManagedIdentity
+        [switch]$ManagedIdentity,
+
+        [Parameter(ParameterSetName = 'ManagedIdentity')]
+        [Parameter(ParameterSetName = 'Interactive')]
+        [Parameter(ParameterSetName = 'Certificate')]
+        [Parameter(ParameterSetName = 'ClientSecret')]
+        $ManagementEndpoint = 'https://management.azure.com'
     )
 
     # Set up module-scoped variables for getting tokens
     $script:TokenSplat = @{}
     $script:CertificatePath = $null
 
+    $script:TokenSplat['Resource'] = $ManagementEndpoint
     $script:TokenSplat['ClientId'] = $ClientId
     if ($PSBoundParameters.ContainsKey('Tenant')) {
         $script:TokenSplat['TenantId'] = $Tenant
@@ -109,6 +121,7 @@ function Connect-AzResourceGraph {
     }
     if ($PSCmdlet.ParameterSetName -eq 'Interactive') {
         $script:TokenSplat['Interactive'] = $true
+        $script:TokenSplat['TokenCache'] = 'AzResourceGraph'
     }
     if ($ManagedIdentity.IsPresent) {
         $script:TokenSplat['ManagedIdentity'] = $true
@@ -117,4 +130,7 @@ function Connect-AzResourceGraph {
     $script:Token = Get-AzToken @script:TokenSplat
     # Save the source of the token to module scope for AssertAzureConnection to know how to refresh it
     $script:TokenSource = 'Module'
+    if ($script:TokenSplat['Interactive'] -eq $true) {
+        $script:TokenSplat['UserName'] = $script:Token.Identity
+    }
 }

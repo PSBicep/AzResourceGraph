@@ -65,6 +65,7 @@ function Assert-AzureConnection {
         # We can therefore safely remove the Interactive parameter from the local LocalTokenSplat
         if ($LocalTokenSplat.ContainsKey('Interactive')) {
             $LocalTokenSplat.Remove('Interactive')
+            $LocalTokenSplat.Remove('ClientId')
         }
 
         $NewToken = Get-AzToken @LocalTokenSplat -ErrorAction 'Stop'
