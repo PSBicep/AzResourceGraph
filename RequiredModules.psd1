@@ -20,7 +20,7 @@
     Sampler               = 'latest'
     'Sampler.GitHubTasks' = 'latest'
     'AzAuth'              = @{
-        Version        = '2.4.0'
+        Version        = '2.5.0'
         MaximumVersion = '2.99.99'
     }
 
