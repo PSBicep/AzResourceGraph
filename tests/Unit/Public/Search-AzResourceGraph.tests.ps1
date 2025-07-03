@@ -54,4 +54,14 @@ Describe 'Search-AzResourceGraph' {
             $Body.managementGroups -contains 'myMG'
         }
     }
+
+    It 'Calls Assert-AzureConnection when not given a token' {
+        $null = Search-AzResourceGraph -QueryPath '~/foo.kql' -PageSize 10
+        Should -Invoke 'Assert-AzureConnection' -Times 1 -Exactly  -ModuleName 'AzResourceGraph'
+    }
+
+    It 'Does not call Assert-AzureConnection when given a token' {
+        $null = Search-AzResourceGraph -QueryPath '~/foo.kql' -PageSize 10 -Token 'fakeToken'
+        Should -Invoke 'Assert-AzureConnection' -Times 0 -Exactly  -ModuleName 'AzResourceGraph'
+    }
 }

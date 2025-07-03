@@ -5,6 +5,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added Token parameter to Search-AzResourceGraph function to allow specifying a token for authentication
+
 ### Changed 
 - Updated dependency on AzAuth to version 2.5.0
 

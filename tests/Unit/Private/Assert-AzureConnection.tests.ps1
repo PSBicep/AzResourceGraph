@@ -105,9 +105,6 @@ Describe 'Assert-AzureConnection' {
                     }
                 } | Should -Throw
             }
-
         }
     }
-
-
 }
