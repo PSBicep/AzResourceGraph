@@ -5,8 +5,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed 
+- Updated dependency on AzAuth to version 2.5.0
+
+## [0.2.0] - 2025-05-15
+
+### Added
+- Disconnect-AzResourceGraph function by @SimonWahlin in #5
+
 ### Fixed
 - Fixed Auth problems
+
+### Changed
+- Enhance token management
 
 ## [0.1.1] - 2025-05-14
 
