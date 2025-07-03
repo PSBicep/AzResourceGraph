@@ -42,6 +42,9 @@ Allow partial scopes in the query. Only applicable for tenant and management gro
 Number of rows to request per page (1-1000).
 The function continues paging until all rows are retrieved.
 
+.PARAMETER Token
+Use to call Azure Resource Graph with a specified access token. Using this parameter will override any sign-in made with Connect-AzResourceGraph for a single command.
+
 .EXAMPLE
 # Execute a query stored in a file against two subscriptions
 Search-AzResourceGraph -QueryPath '.\vm-details.kql' `
@@ -90,7 +93,11 @@ function Search-AzResourceGraph {
         [Parameter(ParameterSetName = 'Path')]
         [Parameter(ParameterSetName = 'String')]
         [ValidateRange(1, 1000)]
-        [int]$PageSize = 1000
+        [int]$PageSize = 1000,
+
+        [Parameter(ParameterSetName = 'Path', DontShow)]
+        [Parameter(ParameterSetName = 'String', DontShow)]
+        [string]$Token
     )
 
     # Ensure only one of SubscriptionId or ManagementGroup is provided
@@ -98,7 +105,10 @@ function Search-AzResourceGraph {
         throw 'KQL Query can only be run against either a Subscription or a Management Group, not both.'
     }
 
-    Assert-AzureConnection -TokenSplat $script:TokenSplat
+    if (-not $PSBoundParameters.ContainsKey('Token')) {
+        Assert-AzureConnection -TokenSplat $script:TokenSplat
+        $Token = $script:Token.Token
+    }
 
     if ($PSCmdlet.ParameterSetName -eq 'Path') {
         $Query = Get-Content $QueryPath -Raw
@@ -120,7 +130,7 @@ function Search-AzResourceGraph {
     if ($PSBoundParameters.ContainsKey('ManagementGroup')) { $Body['managementGroups'] = @($ManagementGroup) }
 
     $Headers = @{
-        'Authorization' = "Bearer $($script:Token.Token)"
+        'Authorization' = "Bearer $Token"
         'Content-Type'  = 'application/json'
     }
 
