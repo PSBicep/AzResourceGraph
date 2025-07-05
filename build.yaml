@@ -133,8 +133,6 @@ TaskHeader: |
 GitHubConfig:
   GitHubFilesToAdd:
     - 'CHANGELOG.md'
-  ReleaseAssets:
-    - output/WikiContent.zip
   GitHubConfigUserName: SimonWahlin
   GitHubConfigUserEmail: 5576847+SimonWahlin@users.noreply.github.com
   UpdateChangelogOnPrerelease: false
