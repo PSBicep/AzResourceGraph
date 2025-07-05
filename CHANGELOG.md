@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added automation for generating the changelog and release notes
 - Added Token parameter to Search-AzResourceGraph function to allow specifying a token for authentication
 
 ### Changed 
