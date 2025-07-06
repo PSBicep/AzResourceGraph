@@ -46,7 +46,10 @@ runs:
 
   - name: Build module
     shell: pwsh
-    run: $ModuleVersion=$Env:ModuleVersion;Write-Verbose "Using version: $ModuleVersion" -Verbose;./build.ps1 -tasks pack
+    run: |
+      $ModuleVersion = $Env:ModuleVersion
+      Write-Verbose "Using version: $ModuleVersion" -Verbose
+      ./build.ps1 -tasks pack
     env:
       ModuleVersion: ${{ steps.formatSemVer.outputs.formattedSemVer }}
 
