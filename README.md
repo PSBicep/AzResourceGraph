@@ -27,7 +27,7 @@ If running `Search-AzResourceGraph` without running `Connect-AzResourceGraph` fi
 `Search-AzResourceGraph` also supports reading queries from a file, which can be useful for complex queries or when you want to keep your queries organized.
 
 It works without any dependency on the Az module, which makes it suitable for use in, for example, specialized containers where AzResourceGraph and AzAuth together use only 15 MB of disk space,
-compared to Az.ResourceGraph which together with Az.Accounts uses 31MB.
+compared to Az.ResourceGraph which together with Az.Accounts uses 31 MB.
 
 The official module Az.ResourceGraph contains a cmdlet called `Search-AzGraph` which works great for many scenarios.
 There are however some scenarios where it requires the user to write a lot of logic around the command.
