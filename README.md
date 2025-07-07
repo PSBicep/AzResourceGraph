@@ -19,7 +19,7 @@ Connect-AzResourceGraph
 Search-AzResourceGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project name, location, resourceGroup"
 ```
 
-If running `Search-AzResourceGraph` without running `Connect-AzResourceGraph` first, the module will automatically try to connect to Azure Resource Graph using the current Azure context from the Az module or Azure CLI. Use the paramter `-Verbose` to see the connection details.
+If running `Search-AzResourceGraph` without running `Connect-AzResourceGraph` first, the module will automatically try to connect to Azure Resource Graph using the current Azure context from the Az module or Azure CLI. Use the parameter `-Verbose` to see the connection details.
 
 ## What is the difference between `Search-AzResourceGraph` and `Search-AzGraph`?
 
